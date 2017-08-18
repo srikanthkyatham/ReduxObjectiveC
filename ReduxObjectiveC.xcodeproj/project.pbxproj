@@ -12,6 +12,9 @@
 		923610C01F45B0CC00398E03 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 923610BF1F45B0CC00398E03 /* Store.m */; };
 		923610C21F45B2A200398E03 /* StoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 923610C11F45B2A200398E03 /* StoreTests.m */; };
 		923610C41F45B94400398E03 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 923610C31F45B94400398E03 /* Action.m */; };
+		92DAD7871F470373009317A6 /* Store.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610BC1F45B09100398E03 /* Store.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92DAD7881F470375009317A6 /* Reducer.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610BD1F45B09C00398E03 /* Reducer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92DAD7891F470378009317A6 /* Action.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610BE1F45B0AE00398E03 /* Action.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +120,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		92DAD7861F470369009317A6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92DAD7871F470373009317A6 /* Store.h in Headers */,
+				92DAD7881F470375009317A6 /* Reducer.h in Headers */,
+				92DAD7891F470378009317A6 /* Action.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -145,6 +158,7 @@
 				923610A61F45B03500398E03 /* Sources */,
 				923610A71F45B03500398E03 /* Frameworks */,
 				923610A81F45B03500398E03 /* Resources */,
+				92DAD7861F470369009317A6 /* Headers */,
 			);
 			buildRules = (
 			);
