@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		921848FD1F47043800957213 /* Store.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610BC1F45B09100398E03 /* Store.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		921848FE1F47043B00957213 /* Action.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610BE1F45B0AE00398E03 /* Action.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		921848FF1F47044100957213 /* Reducer.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610BD1F45B09C00398E03 /* Reducer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		923610AB1F45B03500398E03 /* ReduxObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 923610A11F45B03500398E03 /* ReduxObjectiveC.framework */; };
 		923610B21F45B03500398E03 /* ReduxObjectiveC.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610A41F45B03500398E03 /* ReduxObjectiveC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		923610C01F45B0CC00398E03 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 923610BF1F45B0CC00398E03 /* Store.m */; };
@@ -117,6 +120,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				923610B21F45B03500398E03 /* ReduxObjectiveC.h in Headers */,
+				921848FF1F47044100957213 /* Reducer.h in Headers */,
+				921848FD1F47043800957213 /* Store.h in Headers */,
+				921848FE1F47043B00957213 /* Action.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

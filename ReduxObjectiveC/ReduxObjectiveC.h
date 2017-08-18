@@ -15,5 +15,7 @@ FOUNDATION_EXPORT double ReduxObjectiveCVersionNumber;
 FOUNDATION_EXPORT const unsigned char ReduxObjectiveCVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <ReduxObjectiveC/PublicHeader.h>
-
+#import <ReduxObjectiveC/Store.h>
+#import <ReduxObjectiveC/Action.h>
+#import <ReduxObjectiveC/Reducer.h>
 
