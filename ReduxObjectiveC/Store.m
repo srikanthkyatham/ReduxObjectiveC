@@ -88,13 +88,6 @@
   [self.storeDictionary setObject:stateDictionary forKey:name];
 }
 
-// run
-// sets the initial state necessary ??
--(void)runFunks {
-  // start listening to the dispatch events
-  // also run the funks
-  // when to run funks
-}
 
 -(NSDictionary*)getStore {
   return self.storeDictionary;

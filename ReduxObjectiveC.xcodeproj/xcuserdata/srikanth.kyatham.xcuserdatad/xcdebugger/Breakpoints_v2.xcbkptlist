@@ -200,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReduxObjectiveC/Store.m"
-            timestampString = "524742424.391592"
+            timestampString = "524743303.152553"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "-dealloc"
             landmarkType = "7">
          </BreakpointContent>
@@ -212,7 +212,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReduxObjectiveCTests/StoreTests.m"
@@ -225,14 +225,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[StoreTests testcall]"
                   moduleName = "ReduxObjectiveCTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/srikanth.kyatham/Projects/js/react_native/components/kaltiot/ReduxObjectiveC/ReduxObjectiveCTests/StoreTests.m"
-                  timestampString = "524743055.936163"
+                  timestampString = "524743304.372967"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "171"
@@ -240,14 +240,14 @@
                   offsetFromSymbolStart = "1509">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[StoreTests testcall]"
                   moduleName = "ReduxObjectiveCTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/srikanth.kyatham/Projects/js/react_native/components/kaltiot/ReduxObjectiveC/ReduxObjectiveCTests/StoreTests.m"
-                  timestampString = "524743055.938767"
+                  timestampString = "524743304.375565"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "171"
@@ -255,14 +255,14 @@
                   offsetFromSymbolStart = "3095">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[StoreTests testcall]"
                   moduleName = "ReduxObjectiveCTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/srikanth.kyatham/Projects/js/react_native/components/kaltiot/ReduxObjectiveC/ReduxObjectiveCTests/StoreTests.m"
-                  timestampString = "524743055.942092"
+                  timestampString = "524743304.37791"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "171"
@@ -270,14 +270,14 @@
                   offsetFromSymbolStart = "3238">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[StoreTests testcall]"
                   moduleName = "ReduxObjectiveCTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/srikanth.kyatham/Projects/js/react_native/components/kaltiot/ReduxObjectiveC/ReduxObjectiveCTests/StoreTests.m"
-                  timestampString = "524743055.946222"
+                  timestampString = "524743304.380225"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "171"
