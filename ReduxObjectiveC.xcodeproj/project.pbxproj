@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		923610AB1F45B03500398E03 /* ReduxObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 923610A11F45B03500398E03 /* ReduxObjectiveC.framework */; };
-		923610B01F45B03500398E03 /* ReduxObjectiveCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 923610AF1F45B03500398E03 /* ReduxObjectiveCTests.m */; };
 		923610B21F45B03500398E03 /* ReduxObjectiveC.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610A41F45B03500398E03 /* ReduxObjectiveC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		923610C01F45B0CC00398E03 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 923610BF1F45B0CC00398E03 /* Store.m */; };
+		923610C21F45B2A200398E03 /* StoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 923610C11F45B2A200398E03 /* StoreTests.m */; };
+		923610C41F45B94400398E03 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 923610C31F45B94400398E03 /* Action.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,8 +29,13 @@
 		923610A41F45B03500398E03 /* ReduxObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReduxObjectiveC.h; sourceTree = "<group>"; };
 		923610A51F45B03500398E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		923610AA1F45B03500398E03 /* ReduxObjectiveCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReduxObjectiveCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		923610AF1F45B03500398E03 /* ReduxObjectiveCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReduxObjectiveCTests.m; sourceTree = "<group>"; };
 		923610B11F45B03500398E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		923610BC1F45B09100398E03 /* Store.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		923610BD1F45B09C00398E03 /* Reducer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reducer.h; sourceTree = "<group>"; };
+		923610BE1F45B0AE00398E03 /* Action.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
+		923610BF1F45B0CC00398E03 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
+		923610C11F45B2A200398E03 /* StoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreTests.m; sourceTree = "<group>"; };
+		923610C31F45B94400398E03 /* Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +78,7 @@
 		923610A31F45B03500398E03 /* ReduxObjectiveC */ = {
 			isa = PBXGroup;
 			children = (
+				923610BB1F45B06F00398E03 /* Redux */,
 				923610A41F45B03500398E03 /* ReduxObjectiveC.h */,
 				923610A51F45B03500398E03 /* Info.plist */,
 			);
@@ -80,10 +88,22 @@
 		923610AE1F45B03500398E03 /* ReduxObjectiveCTests */ = {
 			isa = PBXGroup;
 			children = (
-				923610AF1F45B03500398E03 /* ReduxObjectiveCTests.m */,
 				923610B11F45B03500398E03 /* Info.plist */,
+				923610C11F45B2A200398E03 /* StoreTests.m */,
 			);
 			path = ReduxObjectiveCTests;
+			sourceTree = "<group>";
+		};
+		923610BB1F45B06F00398E03 /* Redux */ = {
+			isa = PBXGroup;
+			children = (
+				923610BC1F45B09100398E03 /* Store.h */,
+				923610BD1F45B09C00398E03 /* Reducer.h */,
+				923610BE1F45B0AE00398E03 /* Action.h */,
+				923610BF1F45B0CC00398E03 /* Store.m */,
+				923610C31F45B94400398E03 /* Action.m */,
+			);
+			name = Redux;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +215,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				923610C01F45B0CC00398E03 /* Store.m in Sources */,
+				923610C41F45B94400398E03 /* Action.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				923610B01F45B03500398E03 /* ReduxObjectiveCTests.m in Sources */,
+				923610C21F45B2A200398E03 /* StoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +408,7 @@
 				923610B71F45B03500398E03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		923610B81F45B03500398E03 /* Build configuration list for PBXNativeTarget "ReduxObjectiveCTests" */ = {
 			isa = XCConfigurationList;
@@ -394,6 +417,7 @@
 				923610BA1F45B03500398E03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
