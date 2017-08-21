@@ -1,0 +1,3 @@
+language: objective_c
+xcode_project: ReduxObjectiveC.xcodeproj # path to your xcodeproj folder
+xcode_scheme: ReduxObjectiveCTests

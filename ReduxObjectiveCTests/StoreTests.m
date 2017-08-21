@@ -25,6 +25,12 @@
   return self;
 }
 
+-(NSDictionary*)getInitialState {
+  return @{
+    @"count" : @42,
+      };
+}
+
 // timer cb
 - (void)timerFireMethod:(NSTimer *)timer {
   Action* action = [[Action alloc]initWithData:@"INCREMENT" withParams:@{}];
@@ -43,17 +49,17 @@
                                    userInfo:nil
                                     repeats:NO];
   }
-  
+
 }
 
 -(NSDictionary*)reduce:(NSDictionary*)state
    withAction:(Action*) action {
-  
+
   NSMutableDictionary *newState = [[NSMutableDictionary alloc] init];
   for (NSString* key in state) {
     newState[key] = state[key];
   }
-  
+
   if ([action.type  isEqual: @"INCREMENT"]) {
     NSNumber *num = newState[@"count"];
     NSNumber *newNum = [NSNumber numberWithInt:[num intValue] + 1];
@@ -70,7 +76,6 @@
 
 @interface StoreTests : XCTestCase
 @property (nonatomic, strong) Store *store;
-@property (nonatomic, strong) NSDictionary *state;
 @property (nonatomic, strong) TestReducer *reducer;
 @property (nonatomic, strong) NSString *reducerName;
 @end
@@ -85,9 +90,6 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     self.store = [[Store alloc] init];
-    self.state = @{
-                    @"count" : @42,
-                  };
     self.reducer = [[TestReducer alloc] initWithStore:self.store];
     self.reducerName = @"reducer";
 }
@@ -97,9 +99,6 @@
   [super tearDown];
   self.store = nil;
 }
-
-
-
 
 - (NSDictionary*)reducerStateFromStore
 {
@@ -126,20 +125,21 @@
 
 
 - (void) testsetReducer {
-  
-  [self.store setReducer:self.reducerName withState:self.state withReducer:self.reducer];
+  NSDictionary* reducerState = [self.reducer getInitialState];
+  [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   NSDictionary *actualState = [self reducerStateFromStore];
-  XCTAssertEqual(self.state, actualState);
+  XCTAssertEqual(reducerState, actualState);
   // assert
 }
 
 - (void)testdispatch {
   // set the reducer
-  [self.store setReducer:self.reducerName withState:self.state withReducer:self.reducer];
+  NSDictionary* reducerState = [self.reducer getInitialState];
+  [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   // dispatch action
   Action* action = [[Action alloc]initWithData:@"INCREMENT" withParams:@{}];
   [self.store dispatch:action];
-  
+
   // check the changed state
   NSDictionary* expectedState = @{
                  @"count" : @43,
@@ -150,18 +150,18 @@
 
 - (void) testcall {
   // setReducer
-   [self.store setReducer:self.reducerName withState:self.state withReducer:self.reducer];
   // dispatch
   // call in the reducer
   // updated state
   // validate funks how not possible since executed in the same thing sync
   // instead check the invokeCall things
-  [self.store setReducer:self.reducerName withState:self.state withReducer:self.reducer];
+  NSDictionary* reducerState = [self.reducer getInitialState];
+  [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   // dispatch action
   Action* action = [[Action alloc]initWithData:@"INCREMENT_ASYNC" withParams:@{}];
   [self.store dispatch:action];
   [self waitForTimer:3];
-  
+
   // check the changed state
   NSDictionary* expectedState = @{
                                   @"count" : @43,
