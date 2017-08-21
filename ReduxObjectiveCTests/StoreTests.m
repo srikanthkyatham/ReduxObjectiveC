@@ -65,7 +65,7 @@
     NSNumber *newNum = [NSNumber numberWithInt:[num intValue] + 1];
     newState[@"count"] = newNum;
   } else if ([action.type isEqual:@"INCREMENT_ASYNC"]) {
-    [self.store call:action withObject:self withParams:@{}];
+    [self.store call:action withDelegate:self withParams:@{}];
   }
   return newState;
 }

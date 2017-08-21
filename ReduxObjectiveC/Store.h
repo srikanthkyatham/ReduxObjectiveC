@@ -24,7 +24,7 @@
 @interface Store : NSObject
 -(void)dispatch:(Action*)action;
 -(void)call:(Action*)action
-  withObject:(id<StoreDelegate>)actionHandler
+  withDelegate:(id<StoreDelegate>)actionHandler
   withParams:(NSDictionary*)params;
 
 -(void)setReducer:(NSString*)name withState:(NSDictionary*)state

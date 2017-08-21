@@ -68,7 +68,7 @@
 // store the actions in the funks
 // delegate function as parameter
 -(void)call:(Action*)action
-  withObject:(id<StoreDelegate>)actionHandler
+  withDelegate:(id<StoreDelegate>)actionHandler
   withParams:(NSDictionary*)params  {
   // store in the dictionary
   NSMutableDictionary *funks = (NSMutableDictionary*)self.storeDictionary[@"funks"];
