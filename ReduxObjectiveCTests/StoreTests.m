@@ -25,7 +25,7 @@
   return self;
 }
 
--(NSDictionary*)getInitialState {
+-(NSDictionary*)initialState {
   return @{
     @"count" : @42,
       };
@@ -125,7 +125,7 @@
 
 
 - (void) testsetReducer {
-  NSDictionary* reducerState = [self.reducer getInitialState];
+  NSDictionary* reducerState = [self.reducer initialState];
   [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   NSDictionary *actualState = [self reducerStateFromStore];
   XCTAssertEqual(reducerState, actualState);
@@ -134,7 +134,7 @@
 
 - (void)testdispatch {
   // set the reducer
-  NSDictionary* reducerState = [self.reducer getInitialState];
+  NSDictionary* reducerState = [self.reducer initialState];
   [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   // dispatch action
   Action* action = [[Action alloc]initWithData:@"INCREMENT" withParams:@{}];
@@ -155,7 +155,7 @@
   // updated state
   // validate funks how not possible since executed in the same thing sync
   // instead check the invokeCall things
-  NSDictionary* reducerState = [self.reducer getInitialState];
+  NSDictionary* reducerState = [self.reducer initialState];
   [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   // dispatch action
   Action* action = [[Action alloc]initWithData:@"INCREMENT_ASYNC" withParams:@{}];

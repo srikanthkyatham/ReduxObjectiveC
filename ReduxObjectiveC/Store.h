@@ -15,7 +15,7 @@
 
 @protocol StoreDelegate
 
--(NSDictionary*)getInitialState;
+-(NSDictionary*)initialState;
 -(void)invokeAction:(Action*)action
  withParams:(NSDictionary*)params;
 
