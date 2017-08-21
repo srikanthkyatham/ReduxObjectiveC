@@ -10,6 +10,7 @@
 		921848FD1F47043800957213 /* Store.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610BC1F45B09100398E03 /* Store.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		921848FE1F47043B00957213 /* Action.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610BE1F45B0AE00398E03 /* Action.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		921848FF1F47044100957213 /* Reducer.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610BD1F45B09C00398E03 /* Reducer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		921849461F4AE9DD00957213 /* ActionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 921849451F4AE9DD00957213 /* ActionTests.m */; };
 		923610AB1F45B03500398E03 /* ReduxObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 923610A11F45B03500398E03 /* ReduxObjectiveC.framework */; };
 		923610B21F45B03500398E03 /* ReduxObjectiveC.h in Headers */ = {isa = PBXBuildFile; fileRef = 923610A41F45B03500398E03 /* ReduxObjectiveC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		923610C01F45B0CC00398E03 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 923610BF1F45B0CC00398E03 /* Store.m */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		921849451F4AE9DD00957213 /* ActionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTests.m; sourceTree = "<group>"; };
 		923610A11F45B03500398E03 /* ReduxObjectiveC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReduxObjectiveC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		923610A41F45B03500398E03 /* ReduxObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReduxObjectiveC.h; sourceTree = "<group>"; };
 		923610A51F45B03500398E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				923610B11F45B03500398E03 /* Info.plist */,
 				923610C11F45B2A200398E03 /* StoreTests.m */,
+				921849451F4AE9DD00957213 /* ActionTests.m */,
 			);
 			path = ReduxObjectiveCTests;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				923610C21F45B2A200398E03 /* StoreTests.m in Sources */,
+				921849461F4AE9DD00957213 /* ActionTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
