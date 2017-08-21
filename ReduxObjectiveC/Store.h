@@ -14,7 +14,7 @@
 #include "Reducer.h"
 
 @protocol StoreDelegate
-
+@required
 -(NSDictionary*)initialState;
 -(void)invokeAction:(Action*)action
  withParams:(NSDictionary*)params;

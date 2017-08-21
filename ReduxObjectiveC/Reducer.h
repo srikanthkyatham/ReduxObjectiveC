@@ -12,7 +12,7 @@
 #include "Action.h"
 
 @protocol ReducerDelegate
-// (state, action)
+@required
 -(NSDictionary*)reduce:(NSDictionary*)state
    withAction:(Action*) action;
 @end
