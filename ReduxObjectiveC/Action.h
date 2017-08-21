@@ -16,8 +16,8 @@
 // ownership of data ??
 @interface Action : NSObject
 
-@property (nonatomic, weak) NSDictionary *params;
-@property (nonatomic, weak) NSString *type;
+@property (nonatomic, strong) NSDictionary *params;
+@property (nonatomic, strong) NSString *type;
 
 
 - (id)initWithData:(NSString*)type

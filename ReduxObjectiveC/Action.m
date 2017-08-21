@@ -17,7 +17,7 @@
 -(id)initWithData:(NSString*)type
          withParams:(NSDictionary*)params {
   if(self = [super init]) {
-    self.type = type;
+    self.type = [[NSString alloc] initWithString:type];;
     self.params = [NSDictionary dictionaryWithDictionary:params];
   }
   return self;
