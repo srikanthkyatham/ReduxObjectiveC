@@ -9,6 +9,20 @@
 #import <XCTest/XCTest.h>
 #import "Action.h"
 
+@interface ParamObject : NSObject
+@property (nonatomic, strong) NSString* param;
+@end
+
+@implementation ParamObject
+
+-(id)init {
+  if (self = [super init]){
+    self.param = @"hello";
+  }
+  return self;
+}
+@end
+
 @interface ActionTests : XCTestCase
 
 @end
@@ -28,7 +42,8 @@
 - (void)testAction {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-  NSDictionary *params = @{@"key": @"value"};
+  ParamObject *param = [ParamObject new];
+  NSDictionary *params = @{@"key": @"value", @"paramObject": param};
   NSString *type = @"test";
   Action* action = [[Action alloc]initWithData:type withParams:params];
   XCTAssertEqualObjects(type, action.type);
