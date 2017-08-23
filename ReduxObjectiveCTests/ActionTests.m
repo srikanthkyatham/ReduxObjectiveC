@@ -57,4 +57,11 @@
     }];
 }
 
+- (void)testActionWithNilParam {
+  NSString *type = @"test";
+  Action* action = [[Action alloc]initWithData:type withParams:nil];
+  XCTAssertEqualObjects(type, action.type);
+  XCTAssertEqualObjects(nil, action.params);
+}
+
 @end

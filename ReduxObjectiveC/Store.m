@@ -88,7 +88,6 @@
   [self.storeDictionary setObject:stateDictionary forKey:name];
 }
 
-
 -(NSDictionary*)getStore {
   return self.storeDictionary;
 }
