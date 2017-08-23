@@ -54,9 +54,8 @@
     NSDictionary* params = funk[@"params"];
     id<StoreDelegate> actionHandler = (id<StoreDelegate>)funk[@"actionHandler"];
 
+    [funks removeObjectForKey:key];
     [actionHandler invokeAction:action withParams:params];
-    // some protocol adhering delegate
-
   }
   // remove the object funks
   [funks removeAllObjects];

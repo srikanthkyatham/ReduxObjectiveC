@@ -48,6 +48,9 @@
                                    selector:@selector(timerFireMethod:)
                                    userInfo:nil
                                     repeats:NO];
+  } else if ([action.type isEqualToString:@"DECREMENT_VIA_CALL"]) {
+    Action* action = [[Action alloc]initWithData:@"DECREMENT" withParams:@{}];
+    [self.store dispatch:action];
   }
 
 }
@@ -66,6 +69,12 @@
     newState[@"count"] = newNum;
   } else if ([action.type isEqual:@"INCREMENT_ASYNC"]) {
     [self.store call:action withDelegate:self withParams:@{}];
+  } else if ([action.type isEqual:@"DECREMENT_VIA_CALL"]) {
+    [self.store call:action withDelegate:self withParams:@{}];
+  } else if ([action.type isEqual:@"DECREMENT"]) {
+    NSNumber *num = newState[@"count"];
+    NSNumber *newNum = [NSNumber numberWithInt:[num intValue] - 1];
+    newState[@"count"] = newNum;
   }
   return newState;
 }
@@ -98,6 +107,8 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
   [super tearDown];
   self.store = nil;
+  self.reducer = nil;
+  self.reducerName = nil;
 }
 
 - (NSDictionary*)reducerStateFromStore
@@ -137,7 +148,7 @@
   NSDictionary* reducerState = [self.reducer initialState];
   [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   // dispatch action
-  Action* action = [[Action alloc]initWithData:@"INCREMENT" withParams:@{}];
+  Action* action = [[Action alloc] initWithData:@"INCREMENT" withParams:@{}];
   [self.store dispatch:action];
 
   // check the changed state
@@ -158,13 +169,29 @@
   NSDictionary* reducerState = [self.reducer initialState];
   [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   // dispatch action
-  Action* action = [[Action alloc]initWithData:@"INCREMENT_ASYNC" withParams:@{}];
+  Action* action = [[Action alloc] initWithData:@"INCREMENT_ASYNC" withParams:@{}];
   [self.store dispatch:action];
   [self waitForTimer:3];
 
   // check the changed state
   NSDictionary* expectedState = @{
                                   @"count" : @43,
+                                  };
+  NSDictionary *actualState = [self reducerStateFromStore];
+  XCTAssertEqualObjects(expectedState, actualState);
+  XCTAssertEqualObjects(@{}, [self funksStateFromStore]);
+}
+
+- (void)testDispatchInDispatch {
+  NSDictionary* reducerState = [self.reducer initialState];
+  [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
+  // dispatch action
+  Action* action = [[Action alloc] initWithData:@"DECREMENT_VIA_CALL" withParams:@{}];
+  [self.store dispatch:action];
+  
+  // check the changed state
+  NSDictionary* expectedState = @{
+                                  @"count" : @41,
                                   };
   NSDictionary *actualState = [self reducerStateFromStore];
   XCTAssertEqualObjects(expectedState, actualState);
