@@ -34,17 +34,7 @@
   return self;
 }
 
-// dispatch
--(void)dispatch:(Action*)action {
-  // run through all the reducers
-  // run through all the funks
-  for (NSString *key in self.storeDictionary) {
-    NSMutableDictionary *stateDictionary = (NSMutableDictionary*)self.storeDictionary[key];
-    NSDictionary* state = (NSDictionary*)stateDictionary[@"state"];
-    id<ReducerDelegate> reducer = (id<ReducerDelegate>)stateDictionary[@"reducer"];
-    NSDictionary* newState = [reducer reduce:state withAction:action];
-    stateDictionary[@"state"] = newState;
-  }
+-(void)runFunks:(NSTimer*)timer {
   NSMutableDictionary *funks = (NSMutableDictionary*)self.storeDictionary[@"funks"];
   // run/call all the funks
   for (NSString *key in funks) {
@@ -61,6 +51,26 @@
   [funks removeAllObjects];
   [self.storeDictionary setObject:funks forKey:@"funks"];
   self.funkIndex = 0;
+}
+
+// dispatch
+-(void)dispatch:(Action*)action {
+  // run through all the reducers
+  // run through all the funks
+  for (NSString *key in self.storeDictionary) {
+    NSMutableDictionary *stateDictionary = (NSMutableDictionary*)self.storeDictionary[key];
+    NSDictionary* state = (NSDictionary*)stateDictionary[@"state"];
+    id<ReducerDelegate> reducer = (id<ReducerDelegate>)stateDictionary[@"reducer"];
+    NSDictionary* newState = [reducer reduce:state withAction:action];
+    stateDictionary[@"state"] = newState;
+  }
+
+  // run funks in next tick
+  [NSTimer scheduledTimerWithTimeInterval:0.1
+    target:self
+    selector:@selector(runFunks:)
+    userInfo:nil
+    repeats:NO];
 }
 
 // call

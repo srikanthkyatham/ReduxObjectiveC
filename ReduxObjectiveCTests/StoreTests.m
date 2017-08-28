@@ -111,6 +111,11 @@
   self.reducerName = nil;
 }
 
+- (NSDictionary*)funksfromStore {
+  NSDictionary *storeDictionary = [self.store getStore];
+  return storeDictionary[@"funks"];
+}
+
 - (NSDictionary*)reducerStateFromStore
 {
   NSDictionary *storeDictionary = [self.store getStore];
@@ -188,6 +193,17 @@
   // dispatch action
   Action* action = [[Action alloc] initWithData:@"DECREMENT_VIA_CALL" withParams:@{}];
   [self.store dispatch:action];
+  // validate the funk now its possible
+  NSDictionary* expectedFunks = @{
+                                  @"0": @{
+                                      @"action": action,
+                                      @"params": @{},
+                                      @"actionHandler": self.reducer
+                                      }
+                                  };
+  NSDictionary* actualFunks = [self funksfromStore];
+  XCTAssertEqualObjects(expectedFunks, actualFunks);
+  [self waitForTimer:1];
   
   // check the changed state
   NSDictionary* expectedState = @{
