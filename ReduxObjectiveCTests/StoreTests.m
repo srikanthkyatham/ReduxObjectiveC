@@ -43,7 +43,7 @@
   // run a timer
   if ([action.type isEqualToString:@"INCREMENT_ASYNC"]) {
     // timer with call back call dispatch
-    [NSTimer scheduledTimerWithTimeInterval:1.0
+    [NSTimer scheduledTimerWithTimeInterval:0.1
                                      target:self
                                    selector:@selector(timerFireMethod:)
                                    userInfo:nil
@@ -87,6 +87,7 @@
 @property (nonatomic, strong) Store *store;
 @property (nonatomic, strong) TestReducer *reducer;
 @property (nonatomic, strong) NSString *reducerName;
+@property (nonatomic, strong) NSDictionary *reducerState;
 @end
 
 
@@ -101,6 +102,8 @@
     self.store = [[Store alloc] init];
     self.reducer = [[TestReducer alloc] initWithStore:self.store];
     self.reducerName = @"reducer";
+    self.reducerState = [self.reducer initialState];
+    [self.store setReducer:self.reducerName withState:self.reducerState withReducer:self.reducer];
 }
 
 - (void)tearDown {
@@ -109,6 +112,7 @@
   self.store = nil;
   self.reducer = nil;
   self.reducerName = nil;
+  self.reducerState = nil;
 }
 
 - (NSDictionary*)funksfromStore {
@@ -141,17 +145,13 @@
 
 
 - (void) testsetReducer {
-  NSDictionary* reducerState = [self.reducer initialState];
-  [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   NSDictionary *actualState = [self reducerStateFromStore];
-  XCTAssertEqual(reducerState, actualState);
+  XCTAssertEqual(self.reducerState, actualState);
   // assert
 }
 
-- (void)testdispatch {
+- (void)testIncrement {
   // set the reducer
-  NSDictionary* reducerState = [self.reducer initialState];
-  [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   // dispatch action
   Action* action = [[Action alloc] initWithData:@"INCREMENT" withParams:@{}];
   [self.store dispatch:action];
@@ -164,18 +164,25 @@
   XCTAssertEqualObjects(expectedState, actualState);
 }
 
-- (void) testcall {
+- (void) testIncrementAsync {
   // setReducer
   // dispatch
   // call in the reducer
   // updated state
   // validate funks how not possible since executed in the same thing sync
   // instead check the invokeCall things
-  NSDictionary* reducerState = [self.reducer initialState];
-  [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
   // dispatch action
   Action* action = [[Action alloc] initWithData:@"INCREMENT_ASYNC" withParams:@{}];
   [self.store dispatch:action];
+  NSDictionary* expectedFunks = @{
+                                  @"0": @{
+                                      @"action": action,
+                                      @"params": @{},
+                                      @"actionHandler": self.reducer
+                                      }
+                                  };
+  NSDictionary* actualFunks = [self funksfromStore];
+  XCTAssertEqualObjects(expectedFunks, actualFunks);
   [self waitForTimer:3];
 
   // check the changed state
@@ -187,9 +194,7 @@
   XCTAssertEqualObjects(@{}, [self funksStateFromStore]);
 }
 
-- (void)testDispatchInDispatch {
-  NSDictionary* reducerState = [self.reducer initialState];
-  [self.store setReducer:self.reducerName withState:reducerState withReducer:self.reducer];
+- (void)testDecrementViaCall {
   // dispatch action
   Action* action = [[Action alloc] initWithData:@"DECREMENT_VIA_CALL" withParams:@{}];
   [self.store dispatch:action];
@@ -211,6 +216,48 @@
                                   };
   NSDictionary *actualState = [self reducerStateFromStore];
   XCTAssertEqualObjects(expectedState, actualState);
+  XCTAssertEqualObjects(@{}, [self funksStateFromStore]);
+}
+
+- (void)testCallAndDispatch {
+  // multiple actions
+  // increment async - 43
+  // validate the funk
+  // decrement - 42
+  
+  // straight
+  // decrement via call - 41
+  // validate the funk
+  // validate the state
+
+  Action* incrementAsync = [[Action alloc] initWithData:@"INCREMENT_ASYNC" withParams:@{}];
+  [self.store dispatch:incrementAsync];
+  Action* increment = [[Action alloc] initWithData:@"INCREMENT" withParams:@{}];
+  [self.store dispatch:increment];
+  Action* decrementViaCall = [[Action alloc] initWithData:@"DECREMENT_VIA_CALL" withParams:@{}];
+  [self.store dispatch:decrementViaCall];
+  NSDictionary* expectedFunks = @{
+                                  @"0": @{
+                                      @"action": incrementAsync,
+                                      @"params": @{},
+                                      @"actionHandler": self.reducer
+                                      },
+                                  @"1": @{
+                                      @"action": decrementViaCall,
+                                      @"params": @{},
+                                      @"actionHandler": self.reducer
+                                      }
+                                  };
+  NSDictionary* actualFunks = [self funksfromStore];
+  XCTAssertEqualObjects(expectedFunks, actualFunks);
+  [self waitForTimer:1];
+  
+  NSDictionary* expectedState = @{
+                                  @"count" : @43,
+                                  };
+  NSDictionary *actualState = [self reducerStateFromStore];
+  XCTAssertEqualObjects(expectedState, actualState);
+  [self waitForTimer:2];
   XCTAssertEqualObjects(@{}, [self funksStateFromStore]);
 }
 

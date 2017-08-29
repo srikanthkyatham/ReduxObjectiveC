@@ -16,6 +16,7 @@
 @interface Store ()
 @property (nonatomic, strong) NSMutableDictionary *storeDictionary;
 @property (nonatomic, assign) int funkIndex;
+@property (nonatomic, strong) NSTimer *funksTimer;
 
 // variables
 
@@ -37,7 +38,8 @@
 -(void)runFunks:(NSTimer*)timer {
   NSMutableDictionary *funks = (NSMutableDictionary*)self.storeDictionary[@"funks"];
   // run/call all the funks
-  for (NSString *key in funks) {
+  NSArray<NSString*> *keys = [funks allKeys];
+  for (NSString *key in keys) {
     // call the funks
     NSMutableDictionary *funk = (NSMutableDictionary*)funks[key];
     Action* action = funk[@"action"];
@@ -51,6 +53,8 @@
   [funks removeAllObjects];
   [self.storeDictionary setObject:funks forKey:@"funks"];
   self.funkIndex = 0;
+  [self.funksTimer invalidate];
+  self.funksTimer = nil;
 }
 
 // dispatch
@@ -66,11 +70,13 @@
   }
 
   // run funks in next tick
-  [NSTimer scheduledTimerWithTimeInterval:0.1
-    target:self
-    selector:@selector(runFunks:)
-    userInfo:nil
-    repeats:NO];
+  if (![self.funksTimer isValid]) {
+    self.funksTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                  target:self
+                                                selector:@selector(runFunks:)
+                                                userInfo:nil
+                                                 repeats:NO];
+  }
 }
 
 // call
@@ -82,10 +88,12 @@
   // store in the dictionary
   NSMutableDictionary *funks = (NSMutableDictionary*)self.storeDictionary[@"funks"];
   NSMutableDictionary *funk = [[NSMutableDictionary alloc] init];
-  [funk setObject:params forKey:@"params"];
+  funk[@"params"] = params;
+  //[funk setObject:params forKey:@"params"];
   [funk setObject:action forKey:@"action"];
   [funk setObject:actionHandler forKey:@"actionHandler"];
   [funks setObject:funk forKey:[@(self.funkIndex) stringValue]];
+  self.funkIndex++;
 }
 
 // set reducer
@@ -104,6 +112,8 @@
 -(void)dealloc {
   // remove all the elements from dictionary and delete
   [self.storeDictionary removeAllObjects];
+  [self.funksTimer invalidate];
+  self.funksTimer = nil;
 }
 
 
