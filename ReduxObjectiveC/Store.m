@@ -12,6 +12,7 @@
 #import "Store.h"
 #import "Action.h"
 #import "Reducer.h"
+#import "ReduxConstants.h"
 
 @interface Store ()
 @property (nonatomic, strong) NSMutableDictionary *storeDictionary;
@@ -30,28 +31,28 @@
     self.funkIndex = 0;
     self.storeDictionary = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *funks = [[NSMutableDictionary alloc] init];
-    [self.storeDictionary setObject:funks forKey:@"funks"];
+    [self.storeDictionary setObject:funks forKey:kReduxFunks];
   }
   return self;
 }
 
 -(void)runFunks:(NSTimer*)timer {
-  NSMutableDictionary *funks = (NSMutableDictionary*)self.storeDictionary[@"funks"];
+  NSMutableDictionary *funks = (NSMutableDictionary*)self.storeDictionary[kReduxFunks];
   // run/call all the funks
   NSArray<NSString*> *keys = [funks allKeys];
   for (NSString *key in keys) {
     // call the funks
     NSMutableDictionary *funk = (NSMutableDictionary*)funks[key];
-    Action* action = funk[@"action"];
-    NSDictionary* params = funk[@"params"];
-    id<StoreDelegate> actionHandler = (id<StoreDelegate>)funk[@"actionHandler"];
+    Action* action = funk[kReduxAction];
+    NSDictionary* params = funk[kReduxParams];
+    id<StoreDelegate> actionHandler = (id<StoreDelegate>)funk[kReduxActionHandler];
 
     [funks removeObjectForKey:key];
     [actionHandler invokeAction:action withParams:params];
   }
   // remove the object funks
   [funks removeAllObjects];
-  [self.storeDictionary setObject:funks forKey:@"funks"];
+  [self.storeDictionary setObject:funks forKey:kReduxFunks];
   self.funkIndex = 0;
   [self.funksTimer invalidate];
   self.funksTimer = nil;
@@ -63,10 +64,10 @@
   // run through all the funks
   for (NSString *key in self.storeDictionary) {
     NSMutableDictionary *stateDictionary = (NSMutableDictionary*)self.storeDictionary[key];
-    NSDictionary* state = (NSDictionary*)stateDictionary[@"state"];
-    id<ReducerDelegate> reducer = (id<ReducerDelegate>)stateDictionary[@"reducer"];
+    NSDictionary* state = (NSDictionary*)stateDictionary[kReduxState];
+    id<ReducerDelegate> reducer = (id<ReducerDelegate>)stateDictionary[kReduxReducer];
     NSDictionary* newState = [reducer reduce:state withAction:action];
-    stateDictionary[@"state"] = newState;
+    stateDictionary[kReduxState] = newState;
   }
 
   // run funks in next tick
@@ -86,12 +87,12 @@
   withDelegate:(id<StoreDelegate>)actionHandler
   withParams:(NSDictionary*)params  {
   // store in the dictionary
-  NSMutableDictionary *funks = (NSMutableDictionary*)self.storeDictionary[@"funks"];
+  NSMutableDictionary *funks = (NSMutableDictionary*)self.storeDictionary[kReduxFunks];
   NSMutableDictionary *funk = [[NSMutableDictionary alloc] init];
-  funk[@"params"] = params;
-  //[funk setObject:params forKey:@"params"];
-  [funk setObject:action forKey:@"action"];
-  [funk setObject:actionHandler forKey:@"actionHandler"];
+  funk[kReduxParams] = params;
+  //[funk setObject:params forKey:kReduxParams];
+  [funk setObject:action forKey:kReduxAction];
+  [funk setObject:actionHandler forKey:kReduxActionHandler];
   [funks setObject:funk forKey:[@(self.funkIndex) stringValue]];
   self.funkIndex++;
 }
@@ -100,8 +101,8 @@
 -(void)setReducer:(NSString*)name withState:(NSDictionary*)state
       withReducer:(id<ReducerDelegate>)reducer{
   NSMutableDictionary *stateDictionary = [[NSMutableDictionary alloc] init];
-  [stateDictionary setObject:state forKey:@"state"];
-  [stateDictionary setObject:reducer forKey:@"reducer"];
+  [stateDictionary setObject:state forKey:kReduxState];
+  [stateDictionary setObject:reducer forKey:kReduxReducer];
   [self.storeDictionary setObject:stateDictionary forKey:name];
 }
 
